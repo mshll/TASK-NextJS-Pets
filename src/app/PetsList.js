@@ -1,7 +1,6 @@
-import pets from "../data/pets";
 import PetItem from "./PetItem";
 
-function PetsList() {
+function PetsList({ pets }) {
   const petList = pets.map((pet) => <PetItem pet={pet} key={pet.id} />);
 
   return (
