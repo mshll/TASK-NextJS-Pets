@@ -3,9 +3,9 @@ import { useState } from "react";
 
 const btnStyle = "m-4 p-2 bg-palette-primary text-white rounded-sm font-primary font-semibold  hover:bg-palette-dark"
 
-function PetItem({ pet }) {
-  const [showGif, setShowGif] = useState(false);
 
+function PetItem({ pet, handleAdoption }) {
+  const [showGif, setShowGif] = useState(false);
   return (
     <div className="h-120 w-72 rounded shadow-lg mx-auto border border-palette-lighter">
       <div className="h-72 border-b-2 border-palette-lighter relative">
@@ -27,7 +27,7 @@ function PetItem({ pet }) {
           <button type="button" onClick={() => setShowGif(!showGif)} className={btnStyle}>
             Pet
           </button>
-          <button type="button" className={btnStyle}>
+          <button type="button" onClick={handleAdoption} className={btnStyle}>
             Adopt
           </button>
         </div>

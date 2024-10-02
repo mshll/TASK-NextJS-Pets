@@ -9,21 +9,28 @@ function PetsList({ pets }) {
   const [filters, setFilters] = useState({
     query: "",
     type: ""
-  })
+  });
+
+  const [adopted, setAdopted] = useState([])
 
   function handleChange(e) {
     setFilters({
       ...filters,
       [e.target.name]: e.target.value
-    })
+    });
+  }
+
+  function handleAdoption(petId) {
+    setAdopted([...adopted, petId]);
   }
 
   const petList = pets
     .filter(pet =>
       pet.name.toLowerCase().includes(filters.query.toLowerCase()) &&
-      (pet.type === filters.type || !filters.type)
+      (pet.type === filters.type || !filters.type) &&
+      !adopted.includes(pet.id)
     )
-    .map((pet) => <PetItem pet={pet} key={pet.id} />);
+    .map((pet) => <PetItem key={pet.id} pet={pet} handleAdoption={() => handleAdoption(pet.id)} />);
 
   return (
     <>
