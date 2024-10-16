@@ -1,8 +1,13 @@
+'use client';
+
+import { useState } from 'react';
 import pets from '../data/pets';
 import PetItem from './PetItem';
 
 function PetsList() {
-  const petList = pets.map((pet) => <PetItem pet={pet} key={pet.id} />);
+  const [query, setQuery] = useState('');
+
+  const petList = pets.map((pet) => pet.name.toLowerCase().includes(query) && <PetItem pet={pet} key={pet.id} />);
 
   return (
     <>
@@ -13,6 +18,9 @@ function PetsList() {
               type="search"
               placeholder="search"
               className="border-gray-300 focus:border-palette-light form-input border rounded-md focus:ring-palette-light w-full text-gray-900"
+              onChange={() => {
+                setQuery(event.target.value.toLowerCase());
+              }}
             />
           </div>
           <div className="flex flex-col flex-grow-0 items-start space-y-1">
