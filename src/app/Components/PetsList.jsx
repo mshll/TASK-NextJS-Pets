@@ -1,15 +1,8 @@
-'use client';
-
-import { useState } from 'react';
-import pets from '../data/pets';
 import PetItem from './PetItem';
 
-function PetsList() {
-  const [query, setQuery] = useState('');
-  const [type, setType] = useState('');
-
+function PetsList({ pets, type, query, handleQuery, handleType }) {
   const petList = pets.map(
-    (pet) => (pet.type === type || type === '') && pet.name.toLowerCase().includes(query) && <PetItem pet={pet} key={pet.id} />
+    (pet) => (type === '' || pet.type === type) && pet.name.toLowerCase().includes(query) && <PetItem pet={pet} key={pet.id} />
   );
 
   return (
@@ -22,15 +15,13 @@ function PetsList() {
               placeholder="search"
               value={query}
               className="border-gray-300 focus:border-palette-light form-input border rounded-md focus:ring-palette-light w-full text-gray-900"
-              onChange={() => {
-                setQuery(event.target.value.toLowerCase());
-              }}
+              onChange={handleQuery}
             />
           </div>
           <div className="flex flex-col flex-grow-0 items-start space-y-1">
             <select
               defaultValue={type}
-              onChange={() => setType(event.target.value)}
+              onChange={handleType}
               className="border-gray-300 focus:border-palette-light form-select border rounded-md focus:ring-palette-light w-full text-gray-900"
             >
               <option value="">All</option>
