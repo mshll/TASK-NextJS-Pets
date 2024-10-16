@@ -6,8 +6,11 @@ import PetItem from './PetItem';
 
 function PetsList() {
   const [query, setQuery] = useState('');
+  const [type, setType] = useState('');
 
-  const petList = pets.map((pet) => pet.name.toLowerCase().includes(query) && <PetItem pet={pet} key={pet.id} />);
+  const petList = pets.map(
+    (pet) => (pet.type === type || type === '') && pet.name.toLowerCase().includes(query) && <PetItem pet={pet} key={pet.id} />
+  );
 
   return (
     <>
@@ -17,6 +20,7 @@ function PetsList() {
             <input
               type="search"
               placeholder="search"
+              value={query}
               className="border-gray-300 focus:border-palette-light form-input border rounded-md focus:ring-palette-light w-full text-gray-900"
               onChange={() => {
                 setQuery(event.target.value.toLowerCase());
@@ -25,7 +29,8 @@ function PetsList() {
           </div>
           <div className="flex flex-col flex-grow-0 items-start space-y-1">
             <select
-              defaultValue={''}
+              defaultValue={type}
+              onChange={() => setType(event.target.value)}
               className="border-gray-300 focus:border-palette-light form-select border rounded-md focus:ring-palette-light w-full text-gray-900"
             >
               <option value="">All</option>
