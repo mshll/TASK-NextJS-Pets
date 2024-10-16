@@ -1,27 +1,28 @@
-import Image from "next/image";
+'use client';
 
-const btnStyle = "m-4 p-2 bg-palette-primary text-white rounded-sm font-primary font-semibold  hover:bg-palette-dark"
+import Image from 'next/image';
+import { useState } from 'react';
+
+const btnStyle = 'm-4 p-2 bg-palette-primary text-white rounded-md font-primary font-semibold  hover:bg-palette-dark';
 
 function PetItem({ pet }) {
+  const [petImage, setPetImage] = useState(pet.image);
+
+  const switchPetImage = () => {
+    console.log(petImage);
+    setPetImage(petImage !== pet.image ? pet.image : pet.image2);
+  };
+
   return (
-    <div className="h-120 w-72 rounded shadow-lg mx-auto border border-palette-lighter">
-      <div className="h-72 border-b-2 border-palette-lighter relative">
-        <Image
-          alt={pet.name}
-          src={pet.image}
-          className="transform duration-500 ease-in-out hover:brightness-75"
-          fill
-          sizes="30vw" />
+    <div className="border-palette-lighter shadow-lg mx-auto border rounded-md w-72 h-120">
+      <div className="relative border-palette-lighter border-b-2 h-72">
+        <Image alt={pet.name} src={petImage} className="hover:brightness-75 rounded-t-md transform duration-500 ease-in-out" fill sizes="30vw" />
       </div>
-      <div className="h-48 relative">
-        <div className="font-primary text-palette-primary text-2xl pt-4 px-4 font-semibold">
-          {pet.name}
-        </div>
-        <div className="text-lg text-gray-600 p-4 font-primary font-light">
-          {pet.description}
-        </div>
-        <div className="grid grid-cols-2 gap-2">
-          <button type="button" className={btnStyle}>
+      <div className="relative h-48">
+        <div className="px-4 pt-4 font-primary font-semibold text-2xl text-palette-primary">{pet.name}</div>
+        <div className="p-4 font-light font-primary text-gray-600 text-lg">{pet.description}</div>
+        <div className="gap-2 grid grid-cols-2">
+          <button type="button" className={btnStyle} onClick={switchPetImage}>
             Pet
           </button>
           <button type="button" className={btnStyle}>

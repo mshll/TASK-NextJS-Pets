@@ -1,11 +1,9 @@
-import PetsList from "./components/PetsList";
+import PetsList from './components/PetsList';
 
 export default function Home() {
   return (
     <div className="mx-auto max-w-6xl">
-      <h1 className="leading-relaxed font-primary font-extrabold text-4xl text-center text-palette-primary mt-4 py-2 sm:py-4">
-        Fur-ends
-      </h1>
+      <h1 className="mt-4 py-2 sm:py-4 font-extrabold font-primary text-4xl text-center text-palette-primary leading-relaxed">Furrrrrrrr-ends</h1>
       <PetsList />
     </div>
   );
